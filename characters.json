@@ -2,12 +2,12 @@
     "characters": [
         {
             "name": "Roland",
-            "voiceURI": "Aaron",
+            "voiceURI": "Ralph",
             "personality": "Old southern American man, Loves trucks"
         },
         {
             "name": "Steve",
-            "voiceURI": "",
+            "voiceURI": "Fred",
             "personality": "Accountant, Loves numbers, Universally adored"
         },
         {
@@ -28,7 +28,7 @@
         {
             "name": "Boing",
             "voiceUri": "Boing",
-            "personality": "Is an alien pretending to be a normal human"
+            "personality": "Is an alien doing a reasonable job to pretend to be a normal human"
         },
         {
             "name": "Bubbles",
