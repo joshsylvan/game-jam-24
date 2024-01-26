@@ -3,7 +3,27 @@
         {
             "name": "Roland",
             "voiceURI": "Aaron",
-            "personality": "Old, Loves trucks"
+            "personality": "Old southern American man, Loves trucks"
+        },
+        {
+            "name": "Steve",
+            "voiceURI": "",
+            "personality": "Accountant, Loves numbers, Universally adored"
+        },
+        {
+            "name": "Larry",
+            "voiceURI": "",
+            "personality": "Ladies man, doesn't like jokes"
+        },
+        {
+            "name": "Norma",
+            "voiceUri": "Grandma (Finnish (Finland))",
+            "personality": "Old russian woman, loves her grandchildren"
+        },
+        {
+            "name": "Ruven",
+            "voiceUri": "",
+            "personality": "Irritable, loves pottery"
         }
     ]
 }
