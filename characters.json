@@ -2,8 +2,38 @@
     "characters": [
         {
             "name": "Roland",
-            "voiceURI": "Aaron",
-            "personality": "Old, Loves trucks"
+            "voiceURI": "Ralph",
+            "personality": "Old southern American man, Loves trucks"
+        },
+        {
+            "name": "Steve",
+            "voiceURI": "Fred",
+            "personality": "Accountant, Loves numbers, Universally adored"
+        },
+        {
+            "name": "Larry",
+            "voiceURI": "Gordon",
+            "personality": "Ladies man, doesn't like jokes"
+        },
+        {
+            "name": "Norma",
+            "voiceUri": "Ellen",
+            "personality": "Old russian woman, loves her grandchildren"
+        },
+        {
+            "name": "Ruven",
+            "voiceUri": "",
+            "personality": "Irritable, loves pottery"
+        },
+        {
+            "name": "Boing",
+            "voiceUri": "Boing",
+            "personality": "Is an alien doing a reasonable job to pretend to be a normal human"
+        },
+        {
+            "name": "Bubbles",
+            "voiceUri": "Bubbles",
+            "personality": "A fish that can talk, likes bread"
         }
     ]
 }
