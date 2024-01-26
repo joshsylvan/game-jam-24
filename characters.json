@@ -12,18 +12,28 @@
         },
         {
             "name": "Larry",
-            "voiceURI": "",
+            "voiceURI": "Gordon",
             "personality": "Ladies man, doesn't like jokes"
         },
         {
             "name": "Norma",
-            "voiceUri": "Grandma (Finnish (Finland))",
+            "voiceUri": "Ellen",
             "personality": "Old russian woman, loves her grandchildren"
         },
         {
             "name": "Ruven",
             "voiceUri": "",
             "personality": "Irritable, loves pottery"
+        },
+        {
+            "name": "Boing",
+            "voiceUri": "Boing",
+            "personality": "Is an alien pretending to be a normal human"
+        },
+        {
+            "name": "Bubbles",
+            "voiceUri": "Bubbles",
+            "personality": "A fish that can talk, likes bread"
         }
     ]
 }
