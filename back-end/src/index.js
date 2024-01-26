@@ -21,8 +21,8 @@ app.post('/', async (req, res) => {
     console.log(completion.choices[0].message.content)
     thread.push(completion.choices[0].message)
     res.send(thread)
-  }catch(completion){
-    res.send(err)
+  }catch(error){
+    console.log(error)
     return
   }
 
