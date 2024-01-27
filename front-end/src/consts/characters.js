@@ -40,4 +40,15 @@ export const BOING = {
     "personality": "Is an alien doing a reasonable job to pretend to be a normal human"
 }
 
+export const CHARACTER_MAP = {
+    [ROLAND.name]: ROLAND,
+    [STEVE.name]: STEVE,
+    [LARRY.name]: LARRY,
+    [NORMA.name]: NORMA,
+    [RUVEN.name]: RUVEN,
+    [BOING.name]: BOING,
+
+};
+
+
 export const CHARACTERS = [ROLAND, STEVE, LARRY, NORMA, RUVEN, BOING];

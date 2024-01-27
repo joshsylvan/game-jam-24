@@ -6,19 +6,23 @@ const scriptParser = require('./scriptParser');
 const imageGenerator = require('./imageGenerator');
 const app = express()
 const port = 3000
+const cors = require('cors')
 
+app.use(cors({
+  origin: "*"
+}));
 app.use(express.json())
 
 const openai = new OpenAI();
 
 app.post('/sitcom', async (req, res) => {
- 
-    const { settingPrompt, characters } = req.body
-    const script = await scriptGenerator(openai, settingPrompt, characters);
-    const parsedScript = scriptParser(script, characters);
-    // parsedScript.background_url = await imageGenerator(openai, parsedScript.scene);
-    res.send(parsedScript)
- 
+  console.log(req);
+  const { settingPrompt, characters } = req.body
+  const script = await scriptGenerator(openai, settingPrompt, characters);
+  const parsedScript = scriptParser(script, characters);
+  // parsedScript.background_url = await imageGenerator(openai, parsedScript.scene);
+  res.send(parsedScript)
+
 })
 
 app.listen(port, () => {
