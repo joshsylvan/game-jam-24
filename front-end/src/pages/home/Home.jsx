@@ -3,20 +3,18 @@ import { useEffect } from "react";
 import { useGameContext } from "../../context/GameContext";
 import { useNavigate } from "react-router";
 import { PageTemplate } from "../../components/PageTempalte";
-import song from "../../assets/turing_rock_show.mp3"
+import song from "../../assets/turing_rock_show.mp3";
 import "./Home.css";
 
-let audioPlaying = false
+let audioPlaying = false;
 function onMouseDown() {
-  if(!audioPlaying) {
-    audioPlaying = true
-    let audio = new Audio(song)
-    audio.loop = true
-    audio.play().catch(err => audioPlaying = false);
+  if (!audioPlaying) {
+    audioPlaying = true;
+    let audio = new Audio(song);
+    audio.loop = true;
+    audio.play().catch((err) => (audioPlaying = false));
   }
 }
-
-
 
 function Home() {
   const [_name, setName] = useState("");
@@ -25,13 +23,12 @@ function Home() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    window.addEventListener('mousedown', onMouseDown);
+    window.addEventListener("mousedown", onMouseDown);
 
     return () => {
       //Stop
-      window.removeEventListener('mousedown', onMouseDown);
-    }
-
+      window.removeEventListener("mousedown", onMouseDown);
+    };
   }, []);
 
   const onJoin = () => {
@@ -41,9 +38,7 @@ function Home() {
   };
 
   const onHostClick = () => {
-    createHost(() => {
-      navigate("/host");
-    });
+    createHost();
   };
 
   useEffect(() => {
@@ -70,11 +65,11 @@ function Home() {
         <div className="user-input">
           <div className="user-box">
             <input
-                className="name-input"
-                type="text"
-                value={_name}
-                onChange={(event) => setName(event.target.value)}
-              />
+              className="name-input"
+              type="text"
+              value={_name}
+              onChange={(event) => setName(event.target.value)}
+            />
             <label>Enter your name</label>
           </div>
           <button className="start-button" onClick={onJoin}>
@@ -83,6 +78,13 @@ function Home() {
             <span></span>
             <span></span>
             Join Game
+          </button>
+          <button className="start-button host-button" onClick={onHostClick}>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Host Game
           </button>
         </div>
       )}
