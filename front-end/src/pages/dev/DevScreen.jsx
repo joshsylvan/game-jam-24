@@ -39,7 +39,7 @@ function DevScreen() {
             <h1>Dev page</h1>
             <div>
                 {audioString && (
-                    <audio autoPlay controls>
+                    <audio controls>
                         {/*<source src={`data:audio/ogg;base64,${audioString}`}/>*/}
                         <source src={audioString} type="audio/mpeg"/>
                     </audio>
