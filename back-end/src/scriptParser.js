@@ -7,6 +7,7 @@ function extractNarrator(line) {
   if (line.startsWith("INT") || line.startsWith("EXT") || line.startsWith("FADE OUT")) return;
   return {
     name: "Narrator",
+    voiceId: "cKx1nyNQBkX7cXitLRzo",
     speech: line
   }
 }
