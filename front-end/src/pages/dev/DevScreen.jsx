@@ -1,6 +1,8 @@
 import {useState} from 'react';
 
 const api_key = "5299cb48eefffcd273820af88db4ffcb"
+let audioContext;
+
 const textToSpeech = async (inputText, voiceId) => {
     let options = {
         method: 'POST',
@@ -22,21 +24,23 @@ const scriptToAudio = async (jsonScript) => {
     json.dialogue.forEach(async (element, index) => {
         let speech = element.speech
         element.audio = textToSpeech(speech, element.voiceId)
-//        element.audio = await Promise.resolve("www.audio.com")
+//        element.audio = await Promise.resolve("https://file-examples.com/storage/fed61549c865b2b5c9768b5/2017/11/file_example_MP3_700KB.mp3")
     });
     return json
 }
 
-const audioPlay = async (url) => {
-    const context = new AudioContext();
-    const source = context.createBufferSource();
-    const audioBuffer = await fetch(url)
-    .then(res => res.arrayBuffer())
-    .then(ArrayBuffer => context.decodeAudioData(ArrayBuffer));
-
-    source.buffer = audioBuffer;
-    source.connect(context.destination);
-    source.start();
+const audioPlay = (dialogue, index) => {
+    let currentEntry = dialogue[index]
+    if(currentEntry) {
+        let audio = new Audio(currentEntry.audio)
+        audio.addEventListener("ended", (event) => {
+            console.log(`END ${index}`);
+            setTimeout(() => {
+                audioPlay(dialogue, index + 1)
+            }, 750)
+        })
+        audio.play();
+    }
 };
 
 function DevScreen() {
@@ -53,9 +57,12 @@ function DevScreen() {
         }));
         console.log(response)
         setDialogueList(response)
+
+        audioPlay(response, 0)
     }
 
     function start() {
+        audioContext = new AudioContext()
         parseScript()
     }
 
@@ -69,10 +76,7 @@ function DevScreen() {
             <div>
                 {dialogList.map((element, index) => (
                     <div key={index} >
-                        <audio controls>
-                            <source src={element.audio} type="audio/mpeg"/>
-                        </audio>
-                        <p>{JSON.stringify(element)}</p>
+                        <p>{element.speech}</p>
                     </div>
                     ))
                 }
