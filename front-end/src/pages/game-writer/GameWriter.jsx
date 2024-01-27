@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { PageTemplate } from "../../components/PageTempalte";
-import { CHARACTERS, CHARACTER_MAP } from "../../consts/characters";
+import { CHARACTERS } from "../../consts/characters";
 import { testScript } from "./testScript";
 import "./GameWriter.css";
+import { GAME_STATE, useGameContext } from "../../context/GameContext";
 
 const getDialogElements = (script) => {
   const dialogElements = [];
@@ -10,6 +11,7 @@ const getDialogElements = (script) => {
   const scriptLength = script.dialogue.length;
   for (let i = 0; i < scriptLength; i += 1) {
     const el = script.dialogue[i];
+    el.index = i;
 
     const isPlayer = el.isAI !== undefined && !el.isAI;
     if (!isPlayer) {
@@ -86,6 +88,8 @@ function GameWriter() {
   const [actors, setActors] = useState({});
   const [prompt, setPrompt] = useState("");
   const [script, setScript] = useState(null);
+  const { sendScript, gameState } = useGameContext();
+
   const onStartWritingClick = async () => {
     setScript(await createScript(prompt, actors));
   };
@@ -96,18 +100,40 @@ function GameWriter() {
     });
   };
 
-  const onSubmitClick = () => {};
+  const onSubmitClick = () => {
+    const newScriptDialogue = [...script.dialogue];
+    let inputs = document.querySelectorAll('input[id="script-input"]');
+    inputs.forEach((element) => {
+      const scriptIndex = parseInt(element.getAttribute("data-script-index"));
+      console.log(element.value);
+      newScriptDialogue[scriptIndex].speech = element.value;
+    });
+    console.log(inputs);
+    const newScript = { ...script, dialogue: newScriptDialogue };
+    setScript(newScript);
+    sendScript(newScript);
+  };
+
+  if (gameState === GAME_STATE.MOVE_TO_PLAY_STATE) {
+    return <h1>Sit back and enjoy the show...</h1>;
+  }
 
   if (script) {
     return (
-      <>
+      <PageTemplate>
         {getDialogElements(script).map((d, index) => {
           if (!d) {
             return <div className="line" key={`break-${index}`} />;
           }
           let speechElement = d.speech;
           if (d.isAI !== undefined && !d.isAI) {
-            speechElement = <input type="text" />;
+            speechElement = (
+              <input
+                id={`script-input`}
+                data-script-index={d.index}
+                type="text"
+              />
+            );
           }
 
           return (
@@ -120,12 +146,12 @@ function GameWriter() {
           );
         })}
         <button onClick={() => onSubmitClick()}>Submit Script</button>
-      </>
+      </PageTemplate>
     );
   }
 
   return (
-    <>
+    <PageTemplate>
       <input
         className="prompt-input"
         type="text"
@@ -150,7 +176,7 @@ function GameWriter() {
         ))}
       </div>
       <button onClick={() => onStartWritingClick()}>Start Writing</button>
-    </>
+    </PageTemplate>
   );
 }
 

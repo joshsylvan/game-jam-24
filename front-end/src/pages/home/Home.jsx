@@ -7,13 +7,19 @@ import { PageTemplate } from "../../components/PageTempalte";
 function Home() {
   const [_name, setName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const { connect, isConnected, name, id } = useGameContext();
+  const { connect, isConnected, name, id, createHost } = useGameContext();
   const navigate = useNavigate();
 
   const onJoin = () => {
     console.log("connecting to game server...");
     setIsLoading(true);
     connect(_name);
+  };
+
+  const onHostClick = () => {
+    createHost(() => {
+      navigate("/host");
+    });
   };
 
   useEffect(() => {
@@ -44,6 +50,7 @@ function Home() {
             placeholder="Please enter your name"
           />
           <button onClick={onJoin}>Join Game</button>
+          <button onClick={onHostClick}>Host Game</button>
         </>
       )}
     </PageTemplate>

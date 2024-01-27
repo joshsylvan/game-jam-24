@@ -4,7 +4,7 @@ import { useGameContext } from "../../context/GameContext";
 import { useNavigate } from "react-router";
 
 function Lobby() {
-  const { isHost, startGame, id, writerId } = useGameContext();
+  const { isHost, startGame, id, writerId, players } = useGameContext();
   const navigate = useNavigate();
 
   const onGameStartClick = () => {
@@ -24,11 +24,26 @@ function Lobby() {
     }
   }, [writerId, id]);
 
+  if (isHost) {
+    return (
+      <PageTemplate>
+        <h1>Hosting</h1>
+        <p>Please wait till game begins all your players have joined</p>
+        <button onClick={() => onGameStartClick()}>Start Game</button>
+        <ul>
+          {players.map(({ name }, i) => (
+            <li key={`name-${name}-${i}`}>{name}</li>
+          ))}
+        </ul>
+      </PageTemplate>
+    );
+  }
+
   return (
     <PageTemplate>
       <h1>Lobby</h1>
       <p>Please wait till game begins...</p>
-      {isHost && <button onClick={() => onGameStartClick()}>Start Game</button>}
+      <p>{players.length} people have joined.</p>
     </PageTemplate>
   );
 }
