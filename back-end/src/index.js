@@ -15,6 +15,8 @@ app.use(express.json())
 
 const openai = new OpenAI();
 
+const io = createSocketServer();
+
 app.post('/sitcom', async (req, res) => {
 
   try {
@@ -32,4 +34,3 @@ app.listen(port, () => {
   console.log(`Listening on port ${port}`)
 })
 
-createSocketServer();

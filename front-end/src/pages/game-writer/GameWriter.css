@@ -1,3 +1,17 @@
+.line {
+    border: 1px solid white;
+    height: 1px;
+}
+
+.char-name {
+    font-size: 12px;
+
+    span {
+        font-weight: 700;
+        font-size: 15px;
+    }
+}
+
 .prompt-input {
     padding: 10px;
     width: 100%;

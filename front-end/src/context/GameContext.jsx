@@ -45,6 +45,10 @@ export const GameContext = ({ children }) => {
     socket.on("game-started", ({ writerId }) => {
       onGameStarted(writerId);
     });
+
+    socket.on("script-generated", ({ script }) => {
+      console.log(script);
+    });
   }, [socket]);
 
   const connect = (name) => {

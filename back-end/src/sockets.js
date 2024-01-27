@@ -73,6 +73,8 @@ function createSocketServer() {
     });
 
     io.httpServer.listen(4000);
+
+    return io;
 }
 
 module.exports = {
