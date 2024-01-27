@@ -6,10 +6,11 @@ import { PageTemplate } from "../../components/PageTempalte";
 import song from "../../assets/turing_rock_show.mp3"
 
 let audioPlaying = false
+let audio;
 function onMouseDown() {
   if(!audioPlaying) {
     audioPlaying = true
-    let audio = new Audio(song)
+    audio = new Audio(song)
     audio.loop = true
     audio.play().catch(err => audioPlaying = false);
   }
@@ -27,6 +28,8 @@ function Home() {
     return () => {
       //Stop
       window.removeEventListener('mousedown', onMouseDown);
+      audio.pause();
+
     }
 
   }, []);
