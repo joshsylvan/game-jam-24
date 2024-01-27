@@ -10,6 +10,7 @@ function onMouseDown() {
   if(!audioPlaying) {
     audioPlaying = true
     let audio = new Audio(song)
+    audio.loop = true
     audio.play().catch(err => audioPlaying = false);
   }
 }
@@ -52,7 +53,7 @@ function Home() {
 
   return (
     <PageTemplate>
-      <h1>The Reverse Turing show</h1>
+      <h1>The Turing Show</h1>
       {isLoading ? (
         "Loading..."
       ) : (
