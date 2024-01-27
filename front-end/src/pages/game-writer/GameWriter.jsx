@@ -1,5 +1,11 @@
+import { PageTemplate } from "../../components/PageTempalte";
+
 function GameWriter() {
-  return <h1>Game Writer</h1>;
+  return (
+    <PageTemplate>
+      <h1>Game Writer</h1>
+    </PageTemplate>
+  );
 }
 
 export default GameWriter;
