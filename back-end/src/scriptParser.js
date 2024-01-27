@@ -62,6 +62,7 @@ function extractFirstScene(lines) {
 function selectRandomPlayerCharacter(characters) {
   const randomIndex = Math.floor(Math.random() * characters.length);
   characters[randomIndex].isAI = false;
+  return characters[randomIndex].name;
 }
 
 function scriptParser(script, characters) {
@@ -69,9 +70,9 @@ function scriptParser(script, characters) {
   const lines = script.split("\n");
   const parsedScript = {}
   
-  selectRandomPlayerCharacter(characters);
   parsedScript.title = extractTitle(lines);
   parsedScript.scene = extractFirstScene(lines);
+  parsedScript.humanCharacter = selectRandomPlayerCharacter(characters);
   parsedScript.dialogue = extractCharacterDialogue(lines, characters);
 
   return parsedScript;

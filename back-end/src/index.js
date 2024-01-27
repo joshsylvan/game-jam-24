@@ -16,7 +16,7 @@ app.use(express.json())
 const openai = new OpenAI();
 
 app.post('/sitcom', async (req, res) => {
-  console.log(req);
+
   const { settingPrompt, characters } = req.body
   const script = await scriptGenerator(openai, settingPrompt, characters);
   const parsedScript = scriptParser(script, characters);
