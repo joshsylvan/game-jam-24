@@ -4,6 +4,7 @@ import { useGameContext } from "../../context/GameContext";
 import { useNavigate } from "react-router";
 import { PageTemplate } from "../../components/PageTempalte";
 import song from "../../assets/turing_rock_show.mp3"
+import "./Home.css";
 
 let audioPlaying = false
 let audio;
@@ -15,6 +16,8 @@ function onMouseDown() {
     audio.play().catch(err => audioPlaying = false);
   }
 }
+
+
 
 function Home() {
   const [_name, setName] = useState("");
@@ -62,20 +65,29 @@ function Home() {
 
   return (
     <PageTemplate>
-      <h1>The Turing Show</h1>
+      <div className="background-image" />
+
       {isLoading ? (
         "Loading..."
       ) : (
-        <>
-          <input
-            type="text"
-            value={_name}
-            onChange={(event) => setName(event.target.value)}
-            placeholder="Please enter your name"
-          />
-          <button onClick={onJoin}>Join Game</button>
-          <button onClick={onHostClick}>Host Game</button>
-        </>
+        <div className="user-input">
+          <div className="user-box">
+            <input
+                className="name-input"
+                type="text"
+                value={_name}
+                onChange={(event) => setName(event.target.value)}
+              />
+            <label>Enter your name</label>
+          </div>
+          <button className="start-button" onClick={onJoin}>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Join Game
+          </button>
+        </div>
       )}
     </PageTemplate>
   );
