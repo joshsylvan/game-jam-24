@@ -23,6 +23,7 @@ function extractCharacterDialogue(lines, characters) {
       continue;
     }
     const characterDialogue = structuredClone(character);
+ 
     const nextLine = lines[i+1];
 
     const hasDirection = nextLine.includes("(");
@@ -37,6 +38,12 @@ function extractCharacterDialogue(lines, characters) {
       characterDialogue.speech = speech;
       i = i + 1;
     }
+
+    if(!character.isAI) {
+      characterDialogue.speech = "...";
+      characterDialogue.direction = undefined
+    }
+
     dialogue.push(characterDialogue);
   }
   return dialogue;
@@ -52,12 +59,17 @@ function extractFirstScene(lines) {
   }
 }
 
+function selectRandomPlayerCharacter(characters) {
+  const randomIndex = Math.floor(Math.random() * characters.length);
+  characters[randomIndex].isAI = false;
+}
+
 function scriptParser(script, characters) {
   console.log("--- Parsing Script ---")
   const lines = script.split("\n");
-  const parsedScript = {
-  }
+  const parsedScript = {}
   
+  selectRandomPlayerCharacter(characters);
   parsedScript.title = extractTitle(lines);
   parsedScript.scene = extractFirstScene(lines);
   parsedScript.dialogue = extractCharacterDialogue(lines, characters);
