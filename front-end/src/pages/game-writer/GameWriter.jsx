@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { PageTemplate } from "../../components/PageTempalte";
-import { CHARACTERS } from "../../consts/characters";
+import { CHARACTERS, CHARACTER_MAP } from "../../consts/characters";
 import { testScript } from "./testScript";
 import "./GameWriter.css";
 import { GAME_STATE, useGameContext } from "../../context/GameContext";
@@ -54,34 +54,34 @@ const getDialogElements = (script) => {
 };
 
 const createScript = async (settingPrompt, actorMap) => {
-  return Promise.resolve(testScript);
-  // const characters = Object.entries(actorMap).reduce(
-  //   (acc, [actor, include]) => {
-  //     if (!include) {
-  //       return acc;
-  //     }
-  //     acc.push(CHARACTER_MAP[actor]);
-  //     return acc;
-  //   },
-  //   []
-  // );
+//  return Promise.resolve(testScript);
+   const characters = Object.entries(actorMap).reduce(
+     (acc, [actor, include]) => {
+       if (!include) {
+         return acc;
+       }
+       acc.push(CHARACTER_MAP[actor]);
+       return acc;
+     },
+     []
+   );
 
-  // try {
-  //   const response = await fetch("http://localhost:3000/sitcom", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       settingPrompt,
-  //       characters,
-  //     }),
-  //   });
-  //   let json = await response.json();
-  //   return json;
-  // } catch (error) {
-  //   console.error(error);
-  // }
+   try {
+     const response = await fetch("http://localhost:3000/sitcom", {
+       method: "POST",
+       headers: {
+         "Content-Type": "application/json",
+       },
+       body: JSON.stringify({
+         settingPrompt,
+         characters,
+       }),
+     });
+     let json = await response.json();
+     return json;
+   } catch (error) {
+     console.error(error);
+   }
 };
 
 function GameWriter() {
