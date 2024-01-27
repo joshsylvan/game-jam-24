@@ -1,5 +1,5 @@
 function extractTitle(lines) {
-  return lines[0].split("Title:")[1].trim();
+  if(lines[0].startsWith("Title:")) return lines[0].split("Title:")[1].trim();
 }
 
 function extractNarrator(line) {
@@ -52,7 +52,7 @@ function extractFirstScene(lines) {
 }
 
 function scriptParser(script, characters) {
-  console.log(script)
+  console.log("--- Parsing Script ---")
   const lines = script.split("\n");
   const parsedScript = {
   }
