@@ -17,12 +17,15 @@ const openai = new OpenAI();
 
 app.post('/sitcom', async (req, res) => {
 
-  const { settingPrompt, characters } = req.body
-  const script = await scriptGenerator(openai, settingPrompt, characters);
-  const parsedScript = scriptParser(script, characters);
-  // parsedScript.background_url = await imageGenerator(openai, parsedScript.scene);
-  res.send(parsedScript)
-
+  try {
+    const { settingPrompt, characters } = req.body
+    const script = await scriptGenerator(openai, settingPrompt, characters);
+    const parsedScript = scriptParser(script, characters);
+    //parsedScript.background_url = await imageGenerator(openai, parsedScript.scene);
+    res.send(parsedScript)
+  } catch (err) {
+    res.status(500).send(err.message)
+  }
 })
 
 app.listen(port, () => {
