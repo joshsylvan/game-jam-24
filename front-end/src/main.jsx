@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -10,6 +9,7 @@ import GameWriter from "./pages/game-writer/GameWriter";
 
 import "./App.css";
 import "./index.css";
+import { GameContext } from "./context/GameContext";
 
 const router = new createBrowserRouter([
   {
@@ -35,7 +35,7 @@ const router = new createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+  <GameContext>
     <RouterProvider router={router} />
-  </React.StrictMode>
+  </GameContext>
 );

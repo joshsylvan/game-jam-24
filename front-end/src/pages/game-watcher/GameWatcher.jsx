@@ -1,5 +1,11 @@
+import { PageTemplate } from "../../components/PageTempalte";
+
 function GameWatcher() {
-  return <h1>Game Watch</h1>;
+  return (
+    <PageTemplate>
+      <h1>Game Watch</h1>
+    </PageTemplate>
+  );
 }
 
 export default GameWatcher;
