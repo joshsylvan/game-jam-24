@@ -57,7 +57,14 @@ function createSocketServer() {
                 return;
             }
 
-            io.emit('game-started')
+
+            // Chose a writer
+            const playerIds = Object.keys(playerMap);
+            const writerId = playerIds[Math.floor(Math.random() * playerIds.length)];
+
+            io.emit('game-started', {
+                writerId,
+            });
         });
 
         client.on('disconnect', () => {

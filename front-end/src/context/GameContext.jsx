@@ -8,6 +8,7 @@ export const GameContext = ({ children }) => {
   const [isConnected, setIsConnected] = useState(false);
   const [name, setName] = useState("");
   const [id, setId] = useState("");
+  const [writerId, setWriterId] = useState("");
 
   const [isHost, setIsHost] = useState(false);
 
@@ -41,8 +42,8 @@ export const GameContext = ({ children }) => {
       onNewHost(id);
     });
 
-    socket.on("game-started", () => {
-      onGameStarted();
+    socket.on("game-started", ({ writerId }) => {
+      onGameStarted(writerId);
     });
   }, [socket]);
 
@@ -57,13 +58,14 @@ export const GameContext = ({ children }) => {
     socket.emit("start-game", { userId });
   };
 
-  const onGameStarted = () => {
+  const onGameStarted = (writerId) => {
+    setWriterId(writerId);
     console.log("LETS G{OOOO");
   };
 
   return (
     <Context.Provider
-      value={{ connect, startGame, isConnected, name, id, isHost }}
+      value={{ connect, startGame, isConnected, name, id, isHost, writerId }}
     >
       {children}
     </Context.Provider>
