@@ -1,6 +1,7 @@
 const express = require('express')
 const OpenAI = require("openai");
 const { createSocketServer } = require('./sockets')
+const scriptParser = require('./scriptParser');
 const app = express()
 const port = 3000
 
@@ -14,16 +15,14 @@ app.post('/sitcom', async (req, res) => {
     const prompt = 
     `Write a short screenplay for a sitcom.
 The sitcom is set at ${settingPrompt}.
-The characters are as follows:
+With only the following characters:
 ${characters.map(character => `${character.name}: ${character.personality}`).join('\n')}`
-
     const completion = await openai.chat.completions.create({
       messages: [{ role: "user", content: prompt}],
       model: "gpt-3.5-turbo",
     });
-
-    console.log(completion.choices[0].message.content)
-    res.send(completion.choices[0].message)
+    const script = scriptParser(completion.choices[0].message.content, characters)
+    res.send(script)
   } catch (error) {
     res.send(error)
   }
