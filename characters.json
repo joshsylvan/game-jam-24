@@ -3,37 +3,38 @@
         {
             "name": "Roland",
             "voiceURI": "Ralph",
+            "voiceId": "mIbUdNBiJryF43xFXqOl",
             "personality": "Old southern American man, Loves trucks"
         },
         {
             "name": "Steve",
             "voiceURI": "Fred",
+            "voiceId": "D9Thk1W7FRMgiOhy3zVI",
             "personality": "Accountant, Loves numbers, Universally adored"
         },
         {
             "name": "Larry",
             "voiceURI": "Gordon",
+            "voiceId": "z9EKNKmiJW8fg2VoPlEp",
             "personality": "Ladies man, doesn't like jokes"
         },
         {
             "name": "Norma",
             "voiceUri": "Ellen",
+            "voiceId": "xNGR0IG7oSi0Xxc2I7DV",
             "personality": "Old russian woman, loves her grandchildren"
         },
         {
             "name": "Ruven",
             "voiceUri": "",
+            "voiceId": "t2vW6lKlBt5WJu9a3rPc",
             "personality": "Irritable, loves pottery"
         },
         {
             "name": "Boing",
             "voiceUri": "Boing",
+            "voiceId": "ZGIj9cETeOPoDKWIvi0w",
             "personality": "Is an alien doing a reasonable job to pretend to be a normal human"
-        },
-        {
-            "name": "Bubbles",
-            "voiceUri": "Bubbles",
-            "personality": "A fish that can talk, likes bread"
         }
     ]
 }
