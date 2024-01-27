@@ -40,3 +40,45 @@
 .read-the-docs {
   color: #888;
 }
+
+
+.image-container {
+  display: block;
+  position: relative;
+  width: 600px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.character {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  z-index: 1000;
+  transition: all 330ms;
+}
+
+.inactive-character {
+  opacity: 66%;
+  scale: 66%;
+}
+
+#char1 {
+  bottom: 0%;
+  left: 0%;
+  background-image: url("https://amymhaddad.s3.amazonaws.com/morocco-blue.png");
+}
+
+#char2 {
+  bottom: 0%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background-image: url("https://amymhaddad.s3.amazonaws.com/morocco-blue.png");
+}
+
+#char3 {
+   bottom: 0%;
+   right: 0%;
+  background-image: url("https://amymhaddad.s3.amazonaws.com/morocco-blue.png");
+}
