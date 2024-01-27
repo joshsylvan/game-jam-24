@@ -36,6 +36,8 @@ function DevScreen() {
     const [currentItem, setCurrentItem] = useState(null);
     const [characters, setCharacters] = useState([]);
     const [background, setBackground] = useState(null);
+    const [started, setStarted] = useState(false);
+    const [finished, setFinished] = useState(false);
 
     const parseScript = async () => {
         let input = test_json //TODO: Get from other screens
@@ -71,44 +73,49 @@ function DevScreen() {
                 console.log(`END ${index}`);
                 setTimeout(() => {
                     audioPlay(dialogue, index + 1)
-                }, 750)
+                }, 660)
             })
             audio.play();
         } else {
-            //TODO: At the end of the script
+            setFinished(true)
         }
     };
 
     function start() {
+        setStarted(true)
         audioContext = new AudioContext()
         parseScript()
     }
 
-    function onFinish() {
+    function next() {
         //TODO: Move to voting screen
     }
 
     return (
         <section>
-            <h1>Dev page</h1>
-            <div>
-                <button onClick={start}>Start</button>
-            </div>
+            { !finished ? <button onClick={start}>Start</button>:  <p></p> }
+
+            { started && !currentItem ? <p>LOADING</p> :  <p></p> }
 
             { currentItem ?
             <div class="image-container">
-                <img src={background} width="600"/>
-                <div id="char1" class={clsx("character", currentItem.name != characters[0].name && 'inactive-character')} />
-                <div id="char2" class={clsx("character", currentItem.name != characters[1].name && 'inactive-character')} />
-                <div id="char3" class={clsx("character", currentItem.name != characters[2].name && 'inactive-character')} />
-            </div> : <p>LOADING</p>
+                <img src={background} width="800"/>
+                <div id="char1" class={clsx("character", currentItem.name != characters[0].name && !finished && 'inactive-character')} />
+                <div id="char2" class={clsx("character", currentItem.name != characters[1].name && !finished && 'inactive-character')} />
+                <div id="char3" class={clsx("character", currentItem.name != characters[2].name && !finished && 'inactive-character')} />
+            </div> : <p></p>
             }
 
-            { currentItem ?
+            { currentItem && !finished ?
            <div>
                 <p>{currentItem.name}</p>
                 <p>{currentItem.speech}</p>
             </div>: <p></p>
+            }
+
+            { finished ? <div>
+                <button onClick={next}>Next</button>
+                </div> :  <p></p>
             }
 
         </section>
@@ -144,5 +151,3 @@ const test_json = `{
     }
 ]
 }`
-
-const stickFigure = "https://assets.stickpng.com/images/5a4bcb062da5ad73df7efe6c.png"
