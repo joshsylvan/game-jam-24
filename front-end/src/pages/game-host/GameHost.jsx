@@ -1,7 +1,8 @@
 import { PageTemplate } from "../../components/PageTempalte";
-import { useGameContext } from "../../context/GameContext";
+import { GAME_STATE, useGameContext } from "../../context/GameContext";
 import { useState } from "react";
 import clsx from "clsx";
+import { useNavigate } from "react-router";
 // TODO: CURTIS THIS IS A HACK WTF
 const api_key = import.meta.env.VITE_ELEVEN_LABS_API_KEY;
 let audioContext;
@@ -36,18 +37,20 @@ const scriptToAudio = async (jsonScript) => {
     let element = json.dialogue[i];
     let speech = element.speech;
 
-//    element.audio = textToSpeech(speech, element.voiceId);
-//    await sleep(1000);
+    //    element.audio = textToSpeech(speech, element.voiceId);
+    //    await sleep(1000);
 
-        element.audio = await Promise.resolve("https://audio-samples.github.io/samples/mp3/blizzard_biased/sample-0.mp3")
+    element.audio = await Promise.resolve(
+      "https://audio-samples.github.io/samples/mp3/blizzard_biased/sample-0.mp3"
+    );
   }
 
   return json;
 };
 
 function GameHost() {
-  const { gameScript } = useGameContext();
-
+  const { gameScript, gameState, startVoting } = useGameContext();
+  const navigate = useNavigate();
   const [dialogList, setDialogueList] = useState([]);
   const [currentItem, setCurrentItem] = useState(null);
   const [characters, setCharacters] = useState([]);
@@ -74,7 +77,7 @@ function GameHost() {
   };
 
   const extractCharacters = (data) => {
-    setCharacters(data.characters)
+    setCharacters(data.characters);
     console.log(`Characters: ${characters}`);
   };
 
@@ -97,13 +100,18 @@ function GameHost() {
   };
 
   function start() {
+    // next(); // For debugging and saving money
     setStarted(true);
     audioContext = new AudioContext();
     parseScript();
   }
 
   function next() {
-    //TODO: Move to voting screen
+    startVoting();
+  }
+
+  if (gameState === GAME_STATE.RESULTS) {
+    navigate("/results");
   }
 
   return (
@@ -123,10 +131,10 @@ function GameHost() {
               currentItem.name != characters[0].name &&
                 !finished &&
                 "inactive-character"
-                )}
-            >
-              <img src={characters[0].image_url} />
-            </div>
+            )}
+          >
+            <img src={characters[0].image_url} />
+          </div>
 
           <div
             id="char2"
@@ -135,7 +143,8 @@ function GameHost() {
               currentItem.name != characters[1].name &&
                 !finished &&
                 "inactive-character"
-            )}>
+            )}
+          >
             <img src={characters[1].image_url} />
           </div>
           <div
@@ -145,7 +154,8 @@ function GameHost() {
               currentItem.name != characters[2].name &&
                 !finished &&
                 "inactive-character"
-            )}>
+            )}
+          >
             <img src={characters[2].image_url} />
           </div>
         </div>

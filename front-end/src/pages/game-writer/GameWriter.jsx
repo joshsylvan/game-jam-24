@@ -6,6 +6,7 @@ import { Loader } from "../../components/Loader";
 import { testScript } from "./testScript";
 import "./GameWriter.css";
 import { GAME_STATE, useGameContext } from "../../context/GameContext";
+import { useNavigate } from "react-router";
 
 const getDialogElements = (script) => {
   const dialogElements = [];
@@ -56,7 +57,7 @@ const getDialogElements = (script) => {
 };
 
 const createScript = async (settingPrompt, actorMap) => {
-  //  return Promise.resolve(testScript);
+  // return Promise.resolve(testScript);
   const characters = Object.entries(actorMap).reduce(
     (acc, [actor, include]) => {
       if (!include) {
@@ -92,6 +93,7 @@ function GameWriter() {
   const [prompt, setPrompt] = useState("");
   const [script, setScript] = useState(null);
   const { sendScript, gameState } = useGameContext();
+  const navigate = useNavigate();
 
   const onStartWritingClick = async () => {
     setIsLoading(true);
@@ -123,6 +125,10 @@ function GameWriter() {
     gameState === GAME_STATE.VOTING
   ) {
     return <h1>Sit back and enjoy the show...</h1>;
+  }
+
+  if (gameState === GAME_STATE.RESULTS) {
+    navigate("/results");
   }
 
   if (script) {

@@ -20,12 +20,6 @@ function GameWatcher() {
     setIsLoading(true);
   };
 
-  useEffect(() => {
-    if (hasVoted) {
-      // navigate("/results");
-    }
-  }, [hasVoted]);
-
   if (gameState === GAME_STATE.MOVE_TO_PLAY_STATE) {
     if (isHost) {
       navigate("/host");
@@ -39,7 +33,7 @@ function GameWatcher() {
       <>
         <h1>Who is the human?</h1>
         {hasVoted ? (
-          <>Waiting for voting to finish</>
+          <p>Waiting for voting to finish</p>
         ) : (
           <div className="button-container">
             {gameScript?.characters.map((char, index) => (
@@ -65,6 +59,10 @@ function GameWatcher() {
         )}
       </>
     );
+  }
+
+  if (gameState === GAME_STATE.RESULTS) {
+    navigate("/results");
   }
 
   return (

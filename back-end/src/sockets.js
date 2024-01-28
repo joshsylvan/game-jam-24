@@ -93,28 +93,32 @@ function createSocketServer() {
                 console.error("only the host can start the voting");
                 return;
             }
+            if (isVoting) {
+                console.error("voting has already started");
+                return;
+            }
 
             votingTimeout = setTimeout(() => {
                 clearTimeout(votingTimeout);
                 clearInterval(votingInterval);
-                io.emit('end-voting');
+                io.emit('end-voting', voterMap);
                 isVoting = false;
             }, 30000);
             votingInterval = setInterval(() => {
                 const playerCount = Object.keys(playerMap);
-                const votedCount = Object.values(votes).reduce((acc, cur) => {
+                const votedCount = Object.values(voterMap).reduce((acc, cur) => {
                     return acc + cur.length;
-                }, 0);
+                }, -1);
                 if (votedCount === playerCount) {
                     clearTimeout(votingTimeout);
                     clearInterval(votingInterval);
-                    io.emit('end-voting');
+                    io.emit('end-voting', voterMap);
                     isVoting = false;
                 }
 
             }, 1000);
             isVoting = true;
-            io.emit('wating-for-votes');
+            io.emit('waiting-for-votes');
         });
 
         client.on('send-vote', ({ userName, vote }) => {
@@ -142,6 +146,9 @@ function createSocketServer() {
         });
 
         client.on("submit-script", ({ script }) => {
+            // Clear the voter map
+            voterMap = {};
+            votedSet.clear();
             // Create the names for the voter map
             script.characters.forEach(char => {
                 voterMap[char.name] = [];

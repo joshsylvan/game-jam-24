@@ -7,6 +7,7 @@ export const GAME_STATE = {
   NONE: 1,
   MOVE_TO_PLAY_STATE: 2,
   VOTING: 3,
+  RESULTS: 4,
 };
 
 export const GameContext = ({ children }) => {
@@ -19,6 +20,7 @@ export const GameContext = ({ children }) => {
   const [gameState, setGameState] = useState(GAME_STATE.NONE);
   const [players, setPlayers] = useState([]);
   const [hasVoted, setHasVoted] = useState(false);
+  const [voterMap, setVoterMap] = useState();
 
   const [isHost, setIsHost] = useState(false);
 
@@ -75,8 +77,13 @@ export const GameContext = ({ children }) => {
       setHasVoted(true);
     });
 
-    socket.on("waiting-for-vote", () => {
+    socket.on("waiting-for-votes", () => {
       setGameState(GAME_STATE.VOTING);
+    });
+
+    socket.on("end-voting", (voterMap) => {
+      setGameState(GAME_STATE.RESULTS);
+      setVoterMap(voterMap);
     });
   }, [socket]);
 
@@ -130,6 +137,7 @@ export const GameContext = ({ children }) => {
         sendVote,
         hasVoted,
         startVoting,
+        voterMap,
       }}
     >
       {children}

@@ -7,10 +7,10 @@ import GameHost from "./pages/game-host/GameHost";
 import GameWatcher from "./pages/game-watcher/GameWatcher";
 import GameWriter from "./pages/game-writer/GameWriter";
 
-
 import "./App.css";
 import "./index.css";
 import { GameContext } from "./context/GameContext";
+import { Results } from "./pages/results/Results";
 
 const router = new createBrowserRouter([
   {
@@ -32,6 +32,10 @@ const router = new createBrowserRouter([
   {
     path: "/writer",
     element: <GameWriter />,
+  },
+  {
+    path: "results",
+    element: <Results />,
   },
 ]);
 
