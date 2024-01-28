@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useGameContext } from "../../context/GameContext";
 import { useNavigate } from "react-router";
 import { PageTemplate } from "../../components/PageTempalte";
+import { Button } from "../../components/button";
 import song from "../../assets/turing_rock_show.mp3";
 import "./Home.css";
 
@@ -74,20 +75,16 @@ function Home() {
             />
             <label>Enter your name</label>
           </div>
-          <button className="start-button" onClick={onJoin}>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
+          <Button className="start-button" onClick={onJoin}>
             Join Game
-          </button>
-          <button className="start-button host-button" onClick={onHostClick}>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
+          </Button>
+          <Button
+            className="start-button"
+            onClick={onHostClick}
+            hueRotation={90}
+          >
             Host Game
-          </button>
+          </Button>
         </div>
       )}
     </PageTemplate>
