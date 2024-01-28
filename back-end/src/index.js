@@ -28,15 +28,15 @@ app.post("/sitcom", async (req, res) => {
       openai,
       `A video game background for the following scene: ${parsedScript.scene}.`
     );
-    // parsedScript.characters = [];
-    // for (const character of characters) {
-    //   const image_url = await imageGenerator(
-    //     openai,
-    //     `A head shot photo of ${character.name} who is ${character.personality}. In the following scene: ${parsedScript.scene}`,
-    //     false
-    //   );
-    //   parsedScript.characters.push({ ...character, image_url });
-    // }
+    parsedScript.characters = [];
+    for (const character of characters) {
+      const image_url = await imageGenerator(
+        openai,
+        `A head shot photo of ${character.name} who ${character.personality}. In the following scene: ${parsedScript.scene}`,
+        false
+      );
+      parsedScript.characters.push({ ...character, image_url });
+    }
     res.send(parsedScript);
   } catch (err) {
     res.status(500).send(err.message);
