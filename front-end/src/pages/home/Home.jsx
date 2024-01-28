@@ -4,6 +4,7 @@ import { useGameContext } from "../../context/GameContext";
 import { useNavigate } from "react-router";
 import { PageTemplate } from "../../components/PageTempalte";
 import { Button } from "../../components/button";
+import { Loader } from "../../components/Loader";
 import song from "../../assets/turing_rock_show.mp3";
 import "./Home.css";
 
@@ -63,7 +64,7 @@ function Home() {
       <div className="background-image" />
 
       {isLoading ? (
-        "Loading..."
+        <Loader />
       ) : (
         <div className="user-input">
           <div className="user-box">

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { PageTemplate } from "../../components/PageTempalte";
 import { CHARACTERS, CHARACTER_MAP } from "../../consts/characters";
+import { Button } from "../../components/button";
+import { Loader } from "../../components/Loader";
 import { testScript } from "./testScript";
 import "./GameWriter.css";
 import { GAME_STATE, useGameContext } from "../../context/GameContext";
@@ -54,43 +56,45 @@ const getDialogElements = (script) => {
 };
 
 const createScript = async (settingPrompt, actorMap) => {
-//  return Promise.resolve(testScript);
-   const characters = Object.entries(actorMap).reduce(
-     (acc, [actor, include]) => {
-       if (!include) {
-         return acc;
-       }
-       acc.push(CHARACTER_MAP[actor]);
-       return acc;
-     },
-     []
-   );
+  //  return Promise.resolve(testScript);
+  const characters = Object.entries(actorMap).reduce(
+    (acc, [actor, include]) => {
+      if (!include) {
+        return acc;
+      }
+      acc.push(CHARACTER_MAP[actor]);
+      return acc;
+    },
+    []
+  );
 
-   try {
-     const response = await fetch("http://localhost:3000/sitcom", {
-       method: "POST",
-       headers: {
-         "Content-Type": "application/json",
-       },
-       body: JSON.stringify({
-         settingPrompt,
-         characters,
-       }),
-     });
-     let json = await response.json();
-     return json;
-   } catch (error) {
-     console.error(error);
-   }
+  try {
+    const response = await fetch("http://localhost:3000/sitcom", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        settingPrompt,
+        characters,
+      }),
+    });
+    let json = await response.json();
+    return json;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 function GameWriter() {
   const [actors, setActors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
   const [prompt, setPrompt] = useState("");
   const [script, setScript] = useState(null);
   const { sendScript, gameState } = useGameContext();
 
   const onStartWritingClick = async () => {
+    setIsLoading(true);
     setScript(await createScript(prompt, actors));
   };
   const onActorChange = ({ target: { checked, id } }) => {
@@ -116,6 +120,13 @@ function GameWriter() {
 
   if (gameState === GAME_STATE.MOVE_TO_PLAY_STATE) {
     return <h1>Sit back and enjoy the show...</h1>;
+  }
+  if (isLoading) {
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
   }
 
   if (script) {
@@ -175,7 +186,7 @@ function GameWriter() {
           </label>
         ))}
       </div>
-      <button onClick={() => onStartWritingClick()}>Start Writing</button>
+      <Button onClick={() => onStartWritingClick()}>Start Writing</Button>
     </PageTemplate>
   );
 }
