@@ -1,13 +1,13 @@
-async function imageGenerator(openai, scene) {
-  console.log("--- Generating Image ---")
+async function imageGenerator(openai, prompt, highQuality = true) {
+  console.log("--- Generating Image ---");
 
   const response = await openai.images.generate({
     model: "dall-e-2",
-    prompt: `A video game background for the following scene: ${scene}.`,
+    prompt: prompt,
     n: 1,
-    size: "1024x1024",
+    size: highQuality ? "1024x1024" : "256x256",
   });
-  return response.data[0].url
+  return response.data[0].url;
 }
 
 module.exports = imageGenerator;
