@@ -121,13 +121,6 @@ function GameWriter() {
   if (gameState === GAME_STATE.MOVE_TO_PLAY_STATE) {
     return <h1>Sit back and enjoy the show...</h1>;
   }
-  if (isLoading) {
-    return (
-      <div>
-        <Loader />
-      </div>
-    );
-  }
 
   if (script) {
     return (
@@ -158,6 +151,14 @@ function GameWriter() {
         })}
         <button onClick={() => onSubmitClick()}>Submit Script</button>
       </PageTemplate>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <div>
+        <Loader />
+      </div>
     );
   }
 
