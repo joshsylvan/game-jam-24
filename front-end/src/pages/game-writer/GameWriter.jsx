@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { PageTemplate } from "../../components/PageTempalte";
 import { CHARACTERS, CHARACTER_MAP } from "../../consts/characters";
+import { Button } from "../../components/button";
+import { Loader } from "../../components/Loader";
 import { testScript } from "./testScript";
 import "./GameWriter.css";
 import { GAME_STATE, useGameContext } from "../../context/GameContext";
@@ -86,11 +88,13 @@ const createScript = async (settingPrompt, actorMap) => {
 
 function GameWriter() {
   const [actors, setActors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
   const [prompt, setPrompt] = useState("");
   const [script, setScript] = useState(null);
   const { sendScript, gameState } = useGameContext();
 
   const onStartWritingClick = async () => {
+    setIsLoading(true);
     setScript(await createScript(prompt, actors));
   };
   const onActorChange = ({ target: { checked, id } }) => {
@@ -153,6 +157,14 @@ function GameWriter() {
     );
   }
 
+  if (isLoading) {
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
+  }
+
   return (
     <PageTemplate>
       <input
@@ -178,7 +190,7 @@ function GameWriter() {
           </label>
         ))}
       </div>
-      <button onClick={() => onStartWritingClick()}>Start Writing</button>
+      <Button onClick={() => onStartWritingClick()}>Start Writing</Button>
     </PageTemplate>
   );
 }

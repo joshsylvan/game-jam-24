@@ -2,13 +2,15 @@ import { useNavigate } from "react-router";
 import { PageTemplate } from "../../components/PageTempalte";
 import { GAME_STATE, useGameContext } from "../../context/GameContext";
 import { useEffect, useState } from "react";
-import { testScript } from "../game-writer/testScript";
+// import { testScript } from "../game-writer/testScript";
 import { Button } from "../../components/Button";
 import "./GameWatcher.css";
 
 function GameWatcher() {
-  const { gameState, sendVote, name, isHost, hasVoted } = useGameContext();
-  const gameScript = testScript;
+  const { gameState, gameScript, sendVote, name, isHost, hasVoted } =
+    useGameContext();
+  // const gameScript = testScript;
+
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
