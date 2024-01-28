@@ -35,10 +35,11 @@ const scriptToAudio = async (jsonScript) => {
   for (let i = 0; i < json.dialogue.length; i++) {
     let element = json.dialogue[i];
     let speech = element.speech;
-    element.audio = textToSpeech(speech, element.voiceId);
-    await sleep(1000);
 
-    //    element.audio = await Promise.resolve("https://audio-samples.github.io/samples/mp3/blizzard_biased/sample-0.mp3")
+//    element.audio = textToSpeech(speech, element.voiceId);
+//    await sleep(1000);
+
+        element.audio = await Promise.resolve("https://audio-samples.github.io/samples/mp3/blizzard_biased/sample-0.mp3")
   }
 
   return json;
@@ -55,7 +56,6 @@ function GameHost() {
   const [finished, setFinished] = useState(false);
 
   const parseScript = async () => {
-    //    let input = test_json //TODO: Get from other screens
     let input = gameScript;
     let result = await scriptToAudio(input);
     setBackground(result.background_url);
@@ -68,20 +68,13 @@ function GameHost() {
     );
     console.log(response);
     setDialogueList(response);
-    extractCharacters(response);
+    extractCharacters(result);
 
     audioPlay(response, 0);
   };
 
-  const extractCharacters = (dialog) => {
-    dialog.forEach((entry) => {
-      if (
-        entry.name != "Narrator" &&
-        !characters.map((char) => char.name).includes(entry.name)
-      ) {
-        characters.push(entry);
-      }
-    });
+  const extractCharacters = (data) => {
+    setCharacters(data.characters)
     console.log(`Characters: ${characters}`);
   };
 
@@ -121,7 +114,8 @@ function GameHost() {
 
       {currentItem ? (
         <div className="image-container">
-          <img src={background} width="800" />
+          <img src={background} />
+
           <div
             id="char1"
             className={clsx(
@@ -129,8 +123,11 @@ function GameHost() {
               currentItem.name != characters[0].name &&
                 !finished &&
                 "inactive-character"
-            )}
-          />
+                )}
+            >
+              <img src={characters[0].image_url} />
+            </div>
+
           <div
             id="char2"
             className={clsx(
@@ -138,8 +135,9 @@ function GameHost() {
               currentItem.name != characters[1].name &&
                 !finished &&
                 "inactive-character"
-            )}
-          />
+            )}>
+            <img src={characters[1].image_url} />
+          </div>
           <div
             id="char3"
             className={clsx(
@@ -147,8 +145,9 @@ function GameHost() {
               currentItem.name != characters[2].name &&
                 !finished &&
                 "inactive-character"
-            )}
-          />
+            )}>
+            <img src={characters[2].image_url} />
+          </div>
         </div>
       ) : (
         <p></p>

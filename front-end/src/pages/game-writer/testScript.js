@@ -1,124 +1,198 @@
 export const testScript = {
-    "title": "Java Junction",
-    "scene": " JAVA JUNCTION - DAY",
-    "humanCharacter": "Roland",
+    "title": "iQueues",
+    "scene": " APPLE STORE - DAY",
+    "humanCharacter": "Ron Swanson",
     "dialogue": [
         {
             "name": "Narrator",
             "voiceId": "cKx1nyNQBkX7cXitLRzo",
-            "speech": "A cozy coffee shop in Amsterdam, bustling with customers. Caffeinated chatter and the aroma of freshly brewed coffee fill the space. NORMA (70s, Russian accent) sits at a corner table, sipping her drink and passionately typing on her laptop. STEVE (40s, accountant) stands behind the counter, meticulously arranging coffee cups."
+            "speech": "The scene is set inside a buzzing Apple store. A long line of customers, including FRANSIS (35, muscular yet gentle), RUVEN (40s, irritable but artsy), and RON SWANSON (50s, grumpy whiskey lover), stands outside anxiously waiting for the release of the next iPhone. The store employees are setting up stands, preparing for the grand event.",
+            "isAI": true
         },
         {
-            "name": "Narrator",
-            "voiceId": "cKx1nyNQBkX7cXitLRzo",
-            "speech": "ROLAND (60s, Southern accent) enters the coffee shop, wearing his trademark trucker cap and plaid shirt. He spots Norma, waves, and joins her at the table."
+            "name": "Fransis",
+            "voiceUri": "Ellen",
+            "voiceId": "xNGR0IG7oSi0Xxc2I7DV",
+            "personality": "Just wants to be a good dad, but has the personality of john cena",
+            "isAI": true,
+            "direction": "enthusiastically",
+            "speech": "Alright, team! Today we'll make it happen. I just hope I can snag the new iPhone for my daughter."
         },
         {
-            "name": "Roland",
-            "voiceURI": "Ralph",
-            "voiceId": "mIbUdNBiJryF43xFXqOl",
-            "personality": "Old southern American man, Loves trucks",
+            "name": "Ruven",
+            "voiceUri": "",
+            "voiceId": "t2vW6lKlBt5WJu9a3rPc",
+            "personality": "Irritable, loves pottery",
+            "isAI": true,
+            "direction": "smiling sarcastically",
+            "speech": "Oh, please, Fransis. I can't believe you dragged me into this. I had pottery class this morning."
+        },
+        {
+            "name": "Ron Swanson",
+            "voiceUri": "",
+            "voiceId": "t2vW6lKlBt5WJu9a3rPc",
+            "personality": "Irritable man, likes whisky",
             "isAI": false,
             "speech": "..."
         },
         {
-            "name": "Norma",
-            "voiceUri": "Ellen",
-            "voiceId": "xNGR0IG7oSi0Xxc2I7DV",
-            "personality": "Old russian woman, loves her grandchildren",
+            "name": "Ruven",
+            "voiceUri": "",
+            "voiceId": "t2vW6lKlBt5WJu9a3rPc",
+            "personality": "Irritable, loves pottery",
             "isAI": true,
-            "direction": "excitedly",
-            "speech": "Oh, Roland! Just got an email from my grandchildren. They're coming to visit from Moscow next week!"
+            "direction": "defensive",
+            "speech": "Pottery connects with my soul, Ron. It's profound."
         },
         {
-            "name": "Roland",
-            "voiceURI": "Ralph",
-            "voiceId": "mIbUdNBiJryF43xFXqOl",
-            "personality": "Old southern American man, Loves trucks",
+            "name": "Narrator",
+            "voiceId": "cKx1nyNQBkX7cXitLRzo",
+            "speech": "Ron glares at Ruven while Fransis tries to defuse the tension.",
+            "isAI": true
+        },
+        {
+            "name": "Fransis",
+            "voiceUri": "Ellen",
+            "voiceId": "xNGR0IG7oSi0Xxc2I7DV",
+            "personality": "Just wants to be a good dad, but has the personality of john cena",
+            "isAI": true,
+            "speech": "Alright, let's keep the peace. We're all here for the same thing. Just think of the happiness the new iPhone will bring."
+        },
+        {
+            "name": "Narrator",
+            "voiceId": "cKx1nyNQBkX7cXitLRzo",
+            "speech": "The doors finally open, and the line starts to move. Customers stream in, excitement on their faces.",
+            "isAI": true
+        },
+        {
+            "name": "Narrator",
+            "voiceId": "cKx1nyNQBkX7cXitLRzo",
+            "speech": "Fransis, Ruven, and Ron are now halfway through the queue, chatting as they wait.",
+            "isAI": true
+        },
+        {
+            "name": "Ruven",
+            "voiceUri": "",
+            "voiceId": "t2vW6lKlBt5WJu9a3rPc",
+            "personality": "Irritable, loves pottery",
+            "isAI": true,
+            "direction": "irritably",
+            "speech": "Fransis, you better not use that muscle to push your way through."
+        },
+        {
+            "name": "Fransis",
+            "voiceUri": "Ellen",
+            "voiceId": "xNGR0IG7oSi0Xxc2I7DV",
+            "personality": "Just wants to be a good dad, but has the personality of john cena",
+            "isAI": true,
+            "direction": "laughs",
+            "speech": "Calm down, Ruven. I respect the queue, just like respect in the ring."
+        },
+        {
+            "name": "Ron Swanson",
+            "voiceUri": "",
+            "voiceId": "t2vW6lKlBt5WJu9a3rPc",
+            "personality": "Irritable man, likes whisky",
             "isAI": false,
             "speech": "..."
         },
         {
-            "name": "Narrator",
-            "voiceId": "cKx1nyNQBkX7cXitLRzo",
-            "speech": "STEVE (leaning over the counter)"
-        },
-        {
-            "name": "Narrator",
-            "voiceId": "cKx1nyNQBkX7cXitLRzo",
-            "speech": "Congratulations, Norma! That's great news. Family time is the best."
-        },
-        {
-            "name": "Narrator",
-            "voiceId": "cKx1nyNQBkX7cXitLRzo",
-            "speech": "Norma's face beams with pride and joy."
-        },
-        {
-            "name": "Norma",
+            "name": "Fransis",
             "voiceUri": "Ellen",
             "voiceId": "xNGR0IG7oSi0Xxc2I7DV",
-            "personality": "Old russian woman, loves her grandchildren",
+            "personality": "Just wants to be a good dad, but has the personality of john cena",
             "isAI": true,
-            "direction": "sincerely",
-            "speech": "Thank you, Steve. My grandchildren mean everything to me. We shall bake pirozhki and share stories of their parents."
+            "direction": "sternly",
+            "speech": "When you have a teenage daughter, you'll do anything for her happiness."
         },
         {
-            "name": "Steve",
-            "voiceURI": "Fred",
-            "voiceId": "D9Thk1W7FRMgiOhy3zVI",
-            "personality": "Accountant, Loves numbers, Universally adored",
-            "isAI": true,
-            "direction": "sincerely",
-            "speech": "That sounds lovely, Norma. Family traditions are rich with love and memories."
+            "name": "Narrator",
+            "voiceId": "cKx1nyNQBkX7cXitLRzo",
+            "speech": "Suddenly, a SALESPERSON approaches the trio.",
+            "isAI": true
         },
         {
-            "name": "Roland",
-            "voiceURI": "Ralph",
-            "voiceId": "mIbUdNBiJryF43xFXqOl",
-            "personality": "Old southern American man, Loves trucks",
-            "isAI": false,
-            "speech": "..."
+            "name": "Narrator",
+            "voiceId": "cKx1nyNQBkX7cXitLRzo",
+            "speech": "SALESPERSON",
+            "isAI": true
         },
         {
-            "name": "Norma",
+            "name": "Narrator",
+            "voiceId": "cKx1nyNQBkX7cXitLRzo",
+            "speech": "(excitedly)",
+            "isAI": true
+        },
+        {
+            "name": "Narrator",
+            "voiceId": "cKx1nyNQBkX7cXitLRzo",
+            "speech": "Good news, folks! We have enough iPhone stock to go around. No need to worry about missing out.",
+            "isAI": true
+        },
+        {
+            "name": "Fransis",
             "voiceUri": "Ellen",
             "voiceId": "xNGR0IG7oSi0Xxc2I7DV",
-            "personality": "Old russian woman, loves her grandchildren",
+            "personality": "Just wants to be a good dad, but has the personality of john cena",
             "isAI": true,
-            "direction": "chuckling",
-            "speech": "Ah, Roland. It's a tale as wild as the Russian winters. I followed love, leaving behind the frostbite for tulips and canals."
+            "direction": "relieved",
+            "speech": "That's fantastic! I can't wait to see the joy on her face."
         },
         {
-            "name": "Steve",
-            "voiceURI": "Fred",
-            "voiceId": "D9Thk1W7FRMgiOhy3zVI",
-            "personality": "Accountant, Loves numbers, Universally adored",
+            "name": "Ruven",
+            "voiceUri": "",
+            "voiceId": "t2vW6lKlBt5WJu9a3rPc",
+            "personality": "Irritable, loves pottery",
             "isAI": true,
             "direction": "smiling",
-            "speech": "This is why I love this place. So many stories and diverse backgrounds, all gathered over a cup of Joe."
+            "speech": "Maybe I'll find inspiration to create an artistic masterpiece with this new device."
         },
         {
             "name": "Narrator",
             "voiceId": "cKx1nyNQBkX7cXitLRzo",
-            "speech": "The customers around them smile and nod in agreement."
+            "speech": "Ron rolls his eyes, takes a swig from his flask, and raises an eyebrow.",
+            "isAI": true
         },
         {
-            "name": "Roland",
-            "voiceURI": "Ralph",
-            "voiceId": "mIbUdNBiJryF43xFXqOl",
-            "personality": "Old southern American man, Loves trucks",
+            "name": "Ron Swanson",
+            "voiceUri": "",
+            "voiceId": "t2vW6lKlBt5WJu9a3rPc",
+            "personality": "Irritable man, likes whisky",
             "isAI": false,
             "speech": "..."
         },
         {
             "name": "Narrator",
             "voiceId": "cKx1nyNQBkX7cXitLRzo",
-            "speech": "They clink their cups together, celebrating their unique bond and the melting pot of cultures that Amsterdam embodies."
+            "speech": "The trio chuckles, sharing a rare, lighthearted moment.",
+            "isAI": true
+        }
+    ],
+    "background_url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-VbYVySAEp4Dj4SNg3h1DBgfX/user-tKn5e0JneCp3xTF81hYFSXif/img-10Dg8rRipWF4z80fhiDxba4t.png?st=2024-01-28T10%3A23%3A40Z&se=2024-01-28T12%3A23%3A40Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-01-27T22%3A26%3A15Z&ske=2024-01-28T22%3A26%3A15Z&sks=b&skv=2021-08-06&sig=bVpFlVsLbDsXUp8%2B%2BKKDBEPWHX3CnKQvHd/Y5GEO3Ao%3D",
+    "characters": [
+        {
+            "name": "Fransis",
+            "voiceUri": "Ellen",
+            "voiceId": "xNGR0IG7oSi0Xxc2I7DV",
+            "personality": "Just wants to be a good dad, but has the personality of john cena",
+            "isAI": true,
+            "image_url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-VbYVySAEp4Dj4SNg3h1DBgfX/user-tKn5e0JneCp3xTF81hYFSXif/img-yXlZRcq9MIhSi2ua5BUdeMq1.png?st=2024-01-28T10%3A23%3A47Z&se=2024-01-28T12%3A23%3A47Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-01-28T01%3A25%3A38Z&ske=2024-01-29T01%3A25%3A38Z&sks=b&skv=2021-08-06&sig=E50FdK7hRZZ10dU5rqOrimWlKVwy/KeAJFFUGxBCFDY%3D"
         },
         {
-            "name": "Narrator",
-            "voiceId": "cKx1nyNQBkX7cXitLRzo",
-            "speech": "Norma, Steve, and Roland continue chatting, sharing laughs and stories. The coffee shop remains a place where friendship bonds are forged and the world feels smaller."
+            "name": "Ruven",
+            "voiceUri": "",
+            "voiceId": "t2vW6lKlBt5WJu9a3rPc",
+            "personality": "Irritable, loves pottery",
+            "isAI": true,
+            "image_url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-VbYVySAEp4Dj4SNg3h1DBgfX/user-tKn5e0JneCp3xTF81hYFSXif/img-n3tYpkHxLtPLW9u6BJzE9krp.png?st=2024-01-28T10%3A23%3A54Z&se=2024-01-28T12%3A23%3A54Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-01-28T01%3A31%3A37Z&ske=2024-01-29T01%3A31%3A37Z&sks=b&skv=2021-08-06&sig=KSrn7qUXtPau3pe%2B9TUCpk7cv8/QDVBjxoMbrya5rqQ%3D"
+        },
+        {
+            "name": "Ron Swanson",
+            "voiceUri": "",
+            "voiceId": "t2vW6lKlBt5WJu9a3rPc",
+            "personality": "Irritable man, likes whisky",
+            "isAI": false,
+            "image_url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-VbYVySAEp4Dj4SNg3h1DBgfX/user-tKn5e0JneCp3xTF81hYFSXif/img-GLkZC8FwLDgrPwtfANvf4Blm.png?st=2024-01-28T10%3A24%3A01Z&se=2024-01-28T12%3A24%3A01Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-01-28T10%3A48%3A33Z&ske=2024-01-29T10%3A48%3A33Z&sks=b&skv=2021-08-06&sig=W0MN45qWQhjn/fnvB2EKqoZk7VhsjkKbNyr9bYzQ5vQ%3D"
         }
     ]
 }
