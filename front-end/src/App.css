@@ -11,9 +11,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -22,6 +24,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -62,6 +65,8 @@
   position: absolute;
   z-index: 1000;
   transition: all 330ms;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .character img {
@@ -71,7 +76,7 @@
 }
 
 .inactive-character {
-  opacity: 66%;
+  filter: brightness(0.5);
   scale: 66%;
 }
 
@@ -88,6 +93,6 @@
 }
 
 #char3 {
-   bottom: 0%;
-   right: 0%;
+  bottom: 0%;
+  right: 0%;
 }

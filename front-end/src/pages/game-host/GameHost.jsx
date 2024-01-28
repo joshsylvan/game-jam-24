@@ -37,12 +37,8 @@ const scriptToAudio = async (jsonScript) => {
     let element = json.dialogue[i];
     let speech = element.speech;
 
-    //    element.audio = textToSpeech(speech, element.voiceId);
-    //    await sleep(1000);
-
-    element.audio = await Promise.resolve(
-      "https://audio-samples.github.io/samples/mp3/blizzard_biased/sample-0.mp3"
-    );
+    element.audio = textToSpeech(speech, element.voiceId);
+    await sleep(1000);
   }
 
   return json;
