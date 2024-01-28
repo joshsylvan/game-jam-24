@@ -11,6 +11,14 @@ function addPlayer(name, id) {
     playerMap[id] = { name };
 }
 
+let votingTimeout;
+let votingInterval;
+let isVoting = false;
+// Map of name to an array of the people who have voted for them e.g. Record<string, string[]>
+let voterMap = {}
+// Set of user ids to stop people voting twice
+const votedSet = new Set();
+
 function removePlayer(id, io) {
     if (!playerMap[id]) {
         console.log("player does not exist");
@@ -75,14 +83,69 @@ function createSocketServer() {
             // Chose a writer
             const playerIds = Object.keys(playerMap);
             const writerId = playerIds[Math.floor(Math.random() * playerIds.length)];
-
             io.emit("game-started", {
                 writerId,
             });
         });
 
+        client.on('start-voting', () => {
+            if (client.id !== hostId) {
+                console.error("only the host can start the voting");
+                return;
+            }
+
+            votingTimeout = setTimeout(() => {
+                clearTimeout(votingTimeout);
+                clearInterval(votingInterval);
+                io.emit('end-voting');
+                isVoting = false;
+            }, 30000);
+            votingInterval = setInterval(() => {
+                const playerCount = Object.keys(playerMap);
+                const votedCount = Object.values(votes).reduce((acc, cur) => {
+                    return acc + cur.length;
+                }, 0);
+                if (votedCount === playerCount) {
+                    clearTimeout(votingTimeout);
+                    clearInterval(votingInterval);
+                    io.emit('end-voting');
+                    isVoting = false;
+                }
+
+            }, 1000);
+            isVoting = true;
+            io.emit('wating-for-votes');
+        });
+
+        client.on('send-vote', ({ userName, vote }) => {
+            if (!isVoting) {
+                console.log("Voting has not started");
+                return;
+            }
+            if (votedSet.has(client.id)) {
+                console.log(`User ${client.id}:${userName} has already voted.`);
+                client.emit('vote-error');
+                return;
+            }
+
+            if (!voterMap[vote]) {
+                console.error('Not a valid vote?');
+                client.emit('vote-error');
+                return;
+            }
+            // Add username to voter map
+            voterMap[vote].push(userName);
+            // Add client to the voted set
+            votedSet.add(client.id);
+            // Emit vote 
+            client.emit('vote-received')
+        });
+
         client.on("submit-script", ({ script }) => {
-            console.log("Script submitted!", script);
+            // Create the names for the voter map
+            script.characters.forEach(char => {
+                voterMap[char.name] = [];
+            });
             io.emit("begin-game", {
                 script,
             });

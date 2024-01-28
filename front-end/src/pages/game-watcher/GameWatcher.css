@@ -1,0 +1,23 @@
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.voting-button {
+  margin: 10px;
+
+  .inner-container {
+    .button-image {
+      max-width: 150px;
+      max-height: 150px;
+      /* width: 100%; */
+      border-radius: 10px !important;
+    }
+
+    .button-name {
+      font-weight: 800px;
+    }
+  }
+
+}

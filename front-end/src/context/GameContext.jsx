@@ -6,6 +6,7 @@ const Context = createContext({});
 export const GAME_STATE = {
   NONE: 1,
   MOVE_TO_PLAY_STATE: 2,
+  VOTING: 3,
 };
 
 export const GameContext = ({ children }) => {
@@ -17,6 +18,7 @@ export const GameContext = ({ children }) => {
   const [gameScript, setGameScript] = useState(null);
   const [gameState, setGameState] = useState(GAME_STATE.NONE);
   const [players, setPlayers] = useState([]);
+  const [hasVoted, setHasVoted] = useState(false);
 
   const [isHost, setIsHost] = useState(false);
 
@@ -63,6 +65,19 @@ export const GameContext = ({ children }) => {
     socket.on("update-players", ({ players }) => {
       setPlayers(players);
     });
+
+    socket.on("vote-error", () => {
+      console.error("VOTE ERROR MAKES ME SAD");
+      setHasVoted(true);
+    });
+
+    socket.on("vote-received", () => {
+      setHasVoted(true);
+    });
+
+    socket.on("waiting-for-vote", () => {
+      setGameState(GAME_STATE.VOTING);
+    });
   }, [socket]);
 
   const createHost = () => {
@@ -89,6 +104,14 @@ export const GameContext = ({ children }) => {
     socket.emit("submit-script", { script });
   };
 
+  const startVoting = () => {
+    socket.emit("start-voting");
+  };
+
+  const sendVote = (userName, vote) => {
+    socket.emit("send-vote", { userName, vote });
+  };
+
   return (
     <Context.Provider
       value={{
@@ -104,6 +127,9 @@ export const GameContext = ({ children }) => {
         createHost,
         players,
         gameScript,
+        sendVote,
+        hasVoted,
+        startVoting,
       }}
     >
       {children}

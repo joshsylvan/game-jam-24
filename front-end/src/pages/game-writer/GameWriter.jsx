@@ -54,34 +54,34 @@ const getDialogElements = (script) => {
 };
 
 const createScript = async (settingPrompt, actorMap) => {
-//  return Promise.resolve(testScript);
-   const characters = Object.entries(actorMap).reduce(
-     (acc, [actor, include]) => {
-       if (!include) {
-         return acc;
-       }
-       acc.push(CHARACTER_MAP[actor]);
-       return acc;
-     },
-     []
-   );
+  //  return Promise.resolve(testScript);
+  const characters = Object.entries(actorMap).reduce(
+    (acc, [actor, include]) => {
+      if (!include) {
+        return acc;
+      }
+      acc.push(CHARACTER_MAP[actor]);
+      return acc;
+    },
+    []
+  );
 
-   try {
-     const response = await fetch("http://localhost:3000/sitcom", {
-       method: "POST",
-       headers: {
-         "Content-Type": "application/json",
-       },
-       body: JSON.stringify({
-         settingPrompt,
-         characters,
-       }),
-     });
-     let json = await response.json();
-     return json;
-   } catch (error) {
-     console.error(error);
-   }
+  try {
+    const response = await fetch("http://localhost:3000/sitcom", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        settingPrompt,
+        characters,
+      }),
+    });
+    let json = await response.json();
+    return json;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 function GameWriter() {
@@ -114,7 +114,10 @@ function GameWriter() {
     sendScript(newScript);
   };
 
-  if (gameState === GAME_STATE.MOVE_TO_PLAY_STATE) {
+  if (
+    gameState === GAME_STATE.MOVE_TO_PLAY_STATE ||
+    gameState === GAME_STATE.VOTING
+  ) {
     return <h1>Sit back and enjoy the show...</h1>;
   }
 

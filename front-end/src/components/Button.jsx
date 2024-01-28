@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
+import clsx from "clsx";
 import "./button.css";
 
-export const Button = ({ children, onClick, hueRotation }) => {
+export const Button = ({ children, onClick, hueRotation, className }) => {
   return (
     <button
-      className="tron-button"
+      className={clsx("tron-button", className)}
       onClick={onClick}
       style={{ filter: "hue-rotate(" + hueRotation + "deg)" }}
     >

@@ -1,3 +1,5 @@
+import { ROLAND, NORMA, STEVE } from '../../consts/characters';
+
 export const testScript = {
     "title": "iQueues",
     "scene": " APPLE STORE - DAY",
