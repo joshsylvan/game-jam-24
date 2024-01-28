@@ -1,44 +1,48 @@
 import { PageTemplate } from "../../components/PageTempalte";
 import { useGameContext } from "../../context/GameContext";
-import {useState} from 'react';
-import clsx from 'clsx';
-
-const api_key = import.meta.env.VITE_ELEVEN_LABS_API_KEY
+import { useState } from "react";
+import clsx from "clsx";
+// TODO: CURTIS THIS IS A HACK WTF
+const api_key = import.meta.env.VITE_ELEVEN_LABS_API_KEY;
 let audioContext;
 
 const textToSpeech = async (inputText, voiceId) => {
   let options = {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'xi-api-key': api_key,
-      'Content-Type': 'application/json; charset=utf-8'
+      "xi-api-key": api_key,
+      "Content-Type": "application/json; charset=utf-8",
     },
-    body: `{"text": "${inputText}"}`
+    body: `{"text": "${inputText}"}`,
   };
 
-  return fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`, options)
-        .then(response => response.blob())
-        .then(blob => URL.createObjectURL(blob))
-        .catch(err => console.error(err));
-}
+  return fetch(
+    `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`,
+    options
+  )
+    .then((response) => response.blob())
+    .then((blob) => URL.createObjectURL(blob))
+    .catch((err) => console.error(err));
+};
 
-const sleep = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
+const sleep = (milliseconds) =>
+  new Promise((resolve) => setTimeout(resolve, milliseconds));
 
 const scriptToAudio = async (jsonScript) => {
-//  let json = JSON.parse(jsonScript)
-  let json = jsonScript
+  //  let json = JSON.parse(jsonScript)
+  let json = jsonScript;
 
   for (let i = 0; i < json.dialogue.length; i++) {
-    let element = json.dialogue[i]
-    let speech = element.speech
-    element.audio = textToSpeech(speech, element.voiceId)
+    let element = json.dialogue[i];
+    let speech = element.speech;
+    element.audio = textToSpeech(speech, element.voiceId);
     await sleep(1000);
 
-//    element.audio = await Promise.resolve("https://audio-samples.github.io/samples/mp3/blizzard_biased/sample-0.mp3")
+    //    element.audio = await Promise.resolve("https://audio-samples.github.io/samples/mp3/blizzard_biased/sample-0.mp3")
   }
 
-  return json
-}
+  return json;
+};
 
 function GameHost() {
   const { gameScript } = useGameContext();
@@ -51,53 +55,58 @@ function GameHost() {
   const [finished, setFinished] = useState(false);
 
   const parseScript = async () => {
-//    let input = test_json //TODO: Get from other screens
-    let input = gameScript
-    let result = await scriptToAudio(input)
-    setBackground(result.background_url)
-    let response = await Promise.all(result.dialogue.map(async (element) => {
-      let newAudio = await element.audio
-      element.audio = newAudio
-      return element
-    }));
-    console.log(response)
-    setDialogueList(response)
-    extractCharacters(response)
+    //    let input = test_json //TODO: Get from other screens
+    let input = gameScript;
+    let result = await scriptToAudio(input);
+    setBackground(result.background_url);
+    let response = await Promise.all(
+      result.dialogue.map(async (element) => {
+        let newAudio = await element.audio;
+        element.audio = newAudio;
+        return element;
+      })
+    );
+    console.log(response);
+    setDialogueList(response);
+    extractCharacters(response);
 
-    audioPlay(response, 0)
-  }
+    audioPlay(response, 0);
+  };
 
   const extractCharacters = (dialog) => {
     dialog.forEach((entry) => {
-      if(entry.name != "Narrator" && !characters.map((char) => char.name).includes(entry.name)) {
-        characters.push(entry)
+      if (
+        entry.name != "Narrator" &&
+        !characters.map((char) => char.name).includes(entry.name)
+      ) {
+        characters.push(entry);
       }
-    })
-    console.log(`Characters: ${characters}`)
-  }
+    });
+    console.log(`Characters: ${characters}`);
+  };
 
   const audioPlay = (dialogue, index) => {
-    let currentEntry = dialogue[index]
-    if(currentEntry) {
-      setCurrentItem(currentEntry)
+    let currentEntry = dialogue[index];
+    if (currentEntry) {
+      setCurrentItem(currentEntry);
 
-      let audio = new Audio(currentEntry.audio)
-      audio.addEventListener("ended", (event) => {
+      let audio = new Audio(currentEntry.audio);
+      audio.addEventListener("ended", () => {
         console.log(`END ${index}`);
         setTimeout(() => {
-          audioPlay(dialogue, index + 1)
-        }, 660)
-      })
+          audioPlay(dialogue, index + 1);
+        }, 660);
+      });
       audio.play();
     } else {
-      setFinished(true)
+      setFinished(true);
     }
   };
 
   function start() {
-    setStarted(true)
-    audioContext = new AudioContext()
-    parseScript()
+    setStarted(true);
+    audioContext = new AudioContext();
+    parseScript();
   }
 
   function next() {
@@ -105,34 +114,64 @@ function GameHost() {
   }
 
   return (
-        <section>
-          { !started && !finished ? <button onClick={start}>Start</button>:  <p></p> }
+    <section>
+      {!started && !finished ? <button onClick={start}>Start</button> : <p></p>}
 
-          { started && !currentItem ? <p>LOADING</p> :  <p></p> }
+      {started && !currentItem ? <p>LOADING</p> : <p></p>}
 
-          { currentItem ?
-            <div class="image-container">
-              <img src={background} width="800"/>
-              <div id="char1" class={clsx("character", currentItem.name != characters[0].name && !finished && 'inactive-character')} />
-              <div id="char2" class={clsx("character", currentItem.name != characters[1].name && !finished && 'inactive-character')} />
-              <div id="char3" class={clsx("character", currentItem.name != characters[2].name && !finished && 'inactive-character')} />
-            </div> : <p></p>
-            }
+      {currentItem ? (
+        <div className="image-container">
+          <img src={background} width="800" />
+          <div
+            id="char1"
+            className={clsx(
+              "character",
+              currentItem.name != characters[0].name &&
+                !finished &&
+                "inactive-character"
+            )}
+          />
+          <div
+            id="char2"
+            className={clsx(
+              "character",
+              currentItem.name != characters[1].name &&
+                !finished &&
+                "inactive-character"
+            )}
+          />
+          <div
+            id="char3"
+            className={clsx(
+              "character",
+              currentItem.name != characters[2].name &&
+                !finished &&
+                "inactive-character"
+            )}
+          />
+        </div>
+      ) : (
+        <p></p>
+      )}
 
-          { currentItem && !finished ?
-           <div>
-             <p>{currentItem.name}</p>
-             <p>{currentItem.speech}</p>
-           </div>: <p></p>
-            }
+      {currentItem && !finished ? (
+        <div>
+          <p>{currentItem.name}</p>
+          <p>{currentItem.speech}</p>
+        </div>
+      ) : (
+        <p></p>
+      )}
 
-          { finished ? <div>
-            <button onClick={next}>Next</button>
-        </div> :  <p></p>
-            }
-
-        </section>
-        );
+      {finished ? (
+        <div>
+          <button onClick={next}>Next</button>
+        </div>
+      ) : (
+        <p></p>
+      )}
+    </section>
+  );
 }
 
 export default GameHost;
@@ -259,4 +298,4 @@ const test_json = `{
             "speech": "Norma, Steve, and Roland continue chatting, sharing laughs and stories. The coffee shop remains a place where friendship bonds are forged and the world feels smaller."
         }
 ]
-}`
+}`;
