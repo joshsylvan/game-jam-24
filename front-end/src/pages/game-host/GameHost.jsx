@@ -3,6 +3,7 @@ import { GAME_STATE, useGameContext } from "../../context/GameContext";
 import { useState } from "react";
 import clsx from "clsx";
 import { useNavigate } from "react-router";
+import { Loader } from "../../components/Loader";
 // TODO: CURTIS THIS IS A HACK WTF
 const api_key = import.meta.env.VITE_ELEVEN_LABS_API_KEY;
 let audioContext;
@@ -30,14 +31,14 @@ const sleep = (milliseconds) =>
   new Promise((resolve) => setTimeout(resolve, milliseconds));
 
 const scriptToAudio = async (jsonScript) => {
-  //  let json = JSON.parse(jsonScript)
+  //let json = JSON.parse(jsonScript);
   let json = jsonScript;
 
   for (let i = 0; i < json.dialogue.length; i++) {
     let element = json.dialogue[i];
     let speech = element.speech;
-
-    element.audio = textToSpeech(speech, element.voiceId);
+    const sanitizedSpeech = speech.replaceAll('"', "");
+    element.audio = textToSpeech(sanitizedSpeech, element.voiceId);
     await sleep(1000);
   }
 
@@ -114,7 +115,7 @@ function GameHost() {
     <section>
       {!started && !finished ? <button onClick={start}>Start</button> : <p></p>}
 
-      {started && !currentItem ? <p>LOADING</p> : <p></p>}
+      {started && !currentItem ? <Loader /> : <p></p>}
 
       {currentItem ? (
         <div className="image-container">

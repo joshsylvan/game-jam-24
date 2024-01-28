@@ -39,6 +39,7 @@ app.post("/sitcom", async (req, res) => {
     }
     res.send(parsedScript);
   } catch (err) {
+    console.log(err);
     res.status(500).send(err.message);
   }
 });
