@@ -6,7 +6,6 @@ import Lobby from "./pages/lobby/Lobby";
 import GameHost from "./pages/game-host/GameHost";
 import GameWatcher from "./pages/game-watcher/GameWatcher";
 import GameWriter from "./pages/game-writer/GameWriter";
-import DevScreen from "./pages/dev/DevScreen";
 
 
 import "./App.css";
@@ -33,10 +32,6 @@ const router = new createBrowserRouter([
   {
     path: "/writer",
     element: <GameWriter />,
-  },
-  {
-    path: "/dev",
-    element: <DevScreen />,
   },
 ]);
 

@@ -3,6 +3,7 @@ import { PageTemplate } from "../../components/PageTempalte";
 import { GAME_STATE, useGameContext } from "../../context/GameContext";
 
 function GameWatcher() {
+
   const { gameState, isHost } = useGameContext();
   const navigate = useNavigate();
   if (gameState === GAME_STATE.MOVE_TO_PLAY_STATE) {

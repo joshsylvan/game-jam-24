@@ -3,7 +3,7 @@ import { useGameContext } from "../../context/GameContext";
 import {useState} from 'react';
 import clsx from 'clsx';
 
-const api_key = "5299cb48eefffcd273820af88db4ffcb"
+const api_key = import.meta.env.VITE_ELEVEN_LABS_API_KEY
 let audioContext;
 
 const textToSpeech = async (inputText, voiceId) => {
